@@ -23,7 +23,7 @@ def clean_search_string(term):
     words = [w for w in words if not w in stop_words]
     return(words)
 
-def returns_term_df(term, path):
+def return_term_df(term, path):
     '''takes a term and returns a dataframe of emails where that term is included'''
 
     query = f"SELECT DISTINCT message_id " + \
