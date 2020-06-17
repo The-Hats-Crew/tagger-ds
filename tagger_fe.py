@@ -41,7 +41,7 @@ def return_term_df(term, path):
     sql_connect.close()
     return output_df
 
-def return_searched_emails(terms, path):
+def return_combined_term_df(terms, path):
     '''takes a list of search terms and a path, returns emails'''
     column_names = ["message_id"]
     df = pd.DataFrame(columns = column_names)
@@ -49,6 +49,15 @@ def return_searched_emails(terms, path):
       temp_df = return_term_df(term, path)
       df = df.append(temp_df)
     return df
+
+def search(search_string, path):
+    '''takes a search string returns a df with emails'''
+    terms = clean_search_string(search_string)
+    results_df = return_combined_term_df(terms)
+    return results_df
+
+
+
 
 
 
