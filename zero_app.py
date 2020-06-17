@@ -1,6 +1,6 @@
 import zerorpc
 
-class TestApi(object):
+class TaggerMail(object):
     """Python class containing the method calls for application
     functionality.
     """
@@ -10,7 +10,7 @@ class TestApi(object):
 def main():
     """Server configuration"""
     address = 'tcp://127.0.0.1:4242'
-    server = zerorpc.Server(TestApi())
+    server = zerorpc.Server(TaggerMail())
     server.bind(address)
     server.run()
     
