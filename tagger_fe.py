@@ -31,10 +31,7 @@ def return_term_df(term, path):
     f"WHERE tags.tag LIKE '%{term}%'"
 
     sql_connect = sqlite3.connect(path)
-
-
     cursor = sql_connect.cursor()
-
 
     results = cursor.execute(query).fetchall()
     output_df = pd.read_sql_query(query,sql_connect)
@@ -54,7 +51,7 @@ def return_combined_term_df(terms, path):
 def search(search_string, path):
     '''takes a search string returns a df with emails'''
     terms = clean_search_string(search_string)
-    results_df = return_combined_term_df(terms)
+    results_df = return_combined_term_df(terms, path)
     return results_df
 
 
