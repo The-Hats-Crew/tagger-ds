@@ -48,6 +48,7 @@ def return_combined_term_df(terms, path):
     for term in terms:
       temp_df = return_term_df(term, path)
       df = df.append(temp_df)
+    df = df.drop_duplicates()
     return df
 
 def search(search_string, path):
