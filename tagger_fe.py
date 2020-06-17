@@ -11,13 +11,13 @@ import pandas as pd
 
 #Setting Up
 
-example = "Bike rentals near San Diego.1"
+# example = "Bike rentals near San Diego.1"
 
-example_path = 'emails.db3'
+# example_path = 'emails.db3'
 
-cursor = sql_connect.cursor()
+# cursor = sql_connect.cursor()
 
-sql_connect = sqlite3.connect(example_path)
+# sql_connect = sqlite3.connect(example_path)
 
 #Functions
 
@@ -36,13 +36,33 @@ def clean_search_string(term):
     words = [w for w in words if not w in stop_words]
     return(words)
 
-def returns_term_df(term):
+def returns_term_df(term, path):
     '''takes a term and returns a dataframe of emails where that term is included'''
-    query = "SELECT * FROM factbook;"
 
-def return_searched_emails(terms, path)
+    query = f"SELECT DISTINCT message_id " + \
+    f"FROM emails INNER JOIN tags ON emails.id = tags.email_id " + \
+    f"WHERE tags.tag LIKE '%{term}%'"
+
+    sql_connect = sqlite3.connect(path)
+
+
+    cursor = sql_connect.cursor()
+
+
+    results = cursor.execute(query).fetchall()
+    output_df = pd.read_sql_query(query,sql_connect)
+    sql_connect.close()
+    return output_df
+
+def return_searched_emails(terms, path):
     '''takes a list of search terms and a path, returns emails'''
+    column_names = ["message_id"]
+    df = pd.DataFrame(columns = column_names)
     for term in terms:
+      temp_df = return_term_df(term, path)
+      df = df.append(temp_df)
+    return df
+
 
 
 
