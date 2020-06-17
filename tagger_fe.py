@@ -1,25 +1,12 @@
-import pandas
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
+
 from nltk.tokenize import word_tokenize
 import string
 from nltk.corpus import stopwords
-
 import sqlite3
 import pandas as pd
-
-#Setting Up
-
-# example = "Bike rentals near San Diego.1"
-
-# example_path = 'emails.db3'
-
-# cursor = sql_connect.cursor()
-
-# sql_connect = sqlite3.connect(example_path)
-
-#Functions
 
 def clean_search_string(term):
     # split into words
