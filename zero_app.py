@@ -1,4 +1,5 @@
 import zerorpc
+from tagger_fe import search
 
 class TaggerMail(object):
     """Python class containing the method calls for application
@@ -6,6 +7,9 @@ class TaggerMail(object):
     """
     def say_hello(self):
         return "Hello, World!"
+    
+    def do_search(search_string, path):
+        return search(search_string, path)
 
 def main():
     """Server configuration"""

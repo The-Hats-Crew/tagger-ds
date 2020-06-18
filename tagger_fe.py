@@ -4,7 +4,7 @@ nltk.download('stopwords')
 
 from nltk.tokenize import word_tokenize
 import string
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords.to_dict()
 import sqlite3
 import pandas as pd
 
@@ -52,7 +52,7 @@ def search(search_string, path):
     '''takes a search string returns a df with emails'''
     terms = clean_search_string(search_string)
     results_df = return_combined_term_df(terms, path)
-    return results_df
+    return results_df.to_dict()
 
 
 
