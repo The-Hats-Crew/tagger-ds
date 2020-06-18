@@ -4,7 +4,7 @@ nltk.download('stopwords')
 
 from nltk.tokenize import word_tokenize
 import string
-from nltk.corpus import stopwords.to_dict()
+from nltk.corpus import stopwords
 import sqlite3
 import pandas as pd
 
