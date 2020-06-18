@@ -9,7 +9,8 @@ class TaggerMail(object):
         return "Hello, World!"
     
     def do_search(search_string, path):
-        return search(search_string, path)
+        res = search(search_string, path)
+        return res.to_json()
 
 def main():
     """Server configuration"""

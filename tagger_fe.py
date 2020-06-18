@@ -52,7 +52,7 @@ def search(search_string, path):
     '''takes a search string returns a df with emails'''
     terms = clean_search_string(search_string)
     results_df = return_combined_term_df(terms, path)
-    return results_df.to_dict()
+    return results_df
 
 
 
