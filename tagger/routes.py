@@ -52,13 +52,15 @@ def sync():
         service = msg.build_service(content['token'])
 
         # Assign recent email id
-        if "recent_id" in content.keys():
-            recent_id = content['recent_id']
-        else:
-            recent_id = None
+        # if "recent_id" in content.keys():
+        #     # recent_id = content['recent_id']
+        # else:
+        #     recent_id = None
 
         # Get list of email ids
-        email_list = msg.user_emails(service, recent_id)
+        # email_list = msg.user_emails(service, recent_id)
+        email_list = content['email_list']
+        print(email_list)
 
         # Create generator for individual emails
         email_gen = msg.generate_emails(service, email_list)

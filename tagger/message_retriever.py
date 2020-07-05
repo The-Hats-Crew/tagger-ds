@@ -198,7 +198,7 @@ def generate_emails(service, id_list):
         Generator that yields each individual email.
     """
     generator = (
-        {"count": x["count"],
+        {
          "email": service.users().messages().get(
             userId='me', id=x["id"]
         ).execute()}
@@ -228,13 +228,24 @@ def generate_tagged_emails(service, email_gen):
         # Begin tagging logic
         payload = email['payload']
         mime_type = payload['mimeType']
-
         if re.match('^text/.+', mime_type):
             message_body = payload['body']['data']
         elif re.match("^multipart/alternative$", mime_type):
-            message_body = payload['parts'][1]['body']['data']
+            try:
+                message_body = payload['parts'][1]['body']['data']
+            except:
+                message_body = payload['parts'][0]['body']['data']
         elif re.match("^multipart/related$", mime_type):
-            message_body = payload['parts'][0]['parts'][1]['body']['data']
+            try:
+                message_body = payload['parts'][0]['parts'][1]['body']['data']
+            except:
+                print(payload['id'])
+        elif re.match("^multipart/mixed$", mime_type):
+            for x in payload['parts']:
+                if x['mimeType'] == 'multipart/alternative':
+                    for y in x['parts']:
+                        if y['mimeType'] == 'text/html':
+                            message_body = y['body']['data']
         else:
             pass
 
@@ -255,6 +266,4 @@ def generate_tagged_emails(service, email_gen):
 
         email['smartTags'] = [word for word in tags_list]
         email['sentiment'] = sentiment_list
-        email['total_count'] = email_gen[1]
-        email['current_count'] = email_obj["count"]
         yield json.dumps(email)
